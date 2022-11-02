@@ -1,4 +1,4 @@
-
+suppressWarnings({lapply(c("dplyr","Seurat","HGNChelper",'GEOquery','Matrix','gridExtra','tidyverse','ggplot2'), library, character.only = T)})
 
 workdir="C:/Users/dell/Documents/Mega/LearnscRNAAnalysis/PlacementProject"
 setwd(workdir)
@@ -83,8 +83,17 @@ save(merge_obj,
      file=paste0(workdir,'/','merge_obj.RData'))
 
 
-merge_max = merge(GSM5676879, y=c(GSM5676880, GSM5676883, GSM5676884),
-                  add.cell.ids=c('GSM5676879','GSM5676880','GSM5676883', 'GSM5676884'), 
+merge_max = merge(GSM5676873, y=c(GSM5676874,GSM5676875,GSM5676876,GSM5676877,
+                                  GSM5676878,GSM5676879,GSM5676880,GSM5676881,GSM5676882,
+                                  GSM5676883,GSM5676884),
+                  add.cell.ids=c("GSM5676873","GSM5676874","GSM5676875","GSM5676876","GSM5676877",
+                                 "GSM5676878","GSM5676879","GSM5676880","GSM5676881","GSM5676882",
+                                 "GSM5676883","GSM5676884"), 
                   project = 'AMD'
 )
+
+
+
+save(merge_max, 
+     file=paste0(workdir,'/','mergeMax_obj.RData'))
 
