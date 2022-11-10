@@ -1,6 +1,6 @@
 suppressWarnings({lapply(c("dplyr","Seurat","HGNChelper",'GEOquery','Matrix','gridExtra','tidyverse','ggplot2'), library, character.only = T)})
 
-workdir="C:/Users/dell/Documents/Mega/LearnscRNAAnalysis/PlacementProject"
+workdir=getwd()
 setwd(workdir)
 accession_no = "GSE188280"
 # download rawfile to the directory
@@ -14,14 +14,12 @@ untar(paste0(accession_no,"_RAW.tar"))
 # sapply(file_list, gunzip)
 
 # Select some samples to analysis
-samples=c("GSM5676873","GSM5676874","GSM5676875","GSM5676876","GSM5676877",
-          "GSM5676878","GSM5676879","GSM5676880","GSM5676881","GSM5676882",
-          "GSM5676883","GSM5676884")
+samples=c("GSM5676874","GSM5676876","GSM5676878","GSM5676880")
 
 
 
 ## Create subfolder  for each sample 
-paths='C:/Users/dell/Documents/Mega/LearnscRNAAnalysis/PlacementProject/GSE188280'
+paths=getwd()
 
 #fileList=list.files(paths, pattern = '.gz')
 
@@ -71,8 +69,8 @@ for(x in dirs){
 
 
 ## Merge the dataset 
-merge_obj = merge(GSM5676879, y=c(GSM5676880, GSM5676883, GSM5676884),
-                  add.cell.ids=c('GSM5676879','GSM5676880','GSM5676883', 'GSM5676884'), 
+merge_obj = merge(GSM5676874, y=c(GSM5676876, GSM5676878, GSM5676880),
+                  add.cell.ids=c('GSM5676874','GSM5676876','GSM5676878', 'GSM5676880'), 
                   project = 'AMD'
 )
 
@@ -82,18 +80,4 @@ merge_obj = merge(GSM5676879, y=c(GSM5676880, GSM5676883, GSM5676884),
 save(merge_obj, 
      file=paste0(workdir,'/','merge_obj.RData'))
 
-
-merge_max = merge(GSM5676873, y=c(GSM5676874,GSM5676875,GSM5676876,GSM5676877,
-                                  GSM5676878,GSM5676879,GSM5676880,GSM5676881,GSM5676882,
-                                  GSM5676883,GSM5676884),
-                  add.cell.ids=c("GSM5676873","GSM5676874","GSM5676875","GSM5676876","GSM5676877",
-                                 "GSM5676878","GSM5676879","GSM5676880","GSM5676881","GSM5676882",
-                                 "GSM5676883","GSM5676884"), 
-                  project = 'AMD'
-)
-
-
-
-save(merge_max, 
-     file=paste0(workdir,'/','mergeMax_obj.RData'))
 
